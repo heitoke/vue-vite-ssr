@@ -26,7 +26,7 @@ let getIndexHTML = async () => {
 }
 
 let start = async () => {
-    let manifest = isProd ? JSON.parse(fs.readFileSync(resolve('../dist/client/ssr-manifest.json'), 'utf-8')) : null,
+    let manifest = isProd ? JSON.parse(fs.readFileSync(resolve('../../dist/client/ssr-manifest.json'), 'utf-8')) : null,
         app = express(),
         router = express.Router(),
         vite = null;

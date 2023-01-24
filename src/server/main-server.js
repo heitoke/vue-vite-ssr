@@ -45,14 +45,28 @@ export async function render(url, manifest = null) {
             let html = '';
 
             for (let key in meta) {
-                if (key === 'og' || key === 'twitter') {
-                    for (let propertyKey in meta[key]) {
-                        html += `\n<meta property="${key}:${propertyKey}" content="${meta[key][propertyKey]}">`;
-                    }
-                } else {
-                    html += `\n<meta name="${key}" content="${meta[key]}">`;
+                switch(key) {
+                    case 'title':
+                        html = `<title>${meta[key]}</title>\n\t<meta name="title" content="${meta[key]}">\n${html}`;
+                        break;
+                    case 'og': case 'twitter':
+                        for (let propertyKey in meta[key]) {
+                            html += `\t<meta property="${key}:${propertyKey}" content="${meta[key][propertyKey]}">\n`;
+                        }
+                        break;
+                    default:
+                        html += `\t<meta name="${key}" content="${meta[key]}">\n`;
+                        break;
                 }
             }
+
+            if (!meta?.title) {
+                let title = process.env.VITE_APP_NAME || 'Vue Vite SSR App';
+
+                html = `<title>${title}</title>\n\t<meta name="title" content="${title}">\n${html}`;
+            }
+
+            console.log(html);
 
             return html;
         }
