@@ -66,8 +66,6 @@ export async function render(url, manifest = null) {
                 html = `<title>${title}</title>\n\t<meta name="title" content="${title}">\n${html}`;
             }
 
-            console.log(html);
-
             return html;
         }
     }];

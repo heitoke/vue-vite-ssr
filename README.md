@@ -2,6 +2,7 @@
 
 ```env
 VITE_APP_NAME=<Text> // default -> Vue Vite SSR App
+VITE_SERVER_PORT=<PORT> // default -> 3000
 ```
 
 ## Dev

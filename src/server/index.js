@@ -8,10 +8,13 @@ import { createServer } from 'vite';
 
 // ? Express
 import express from 'express';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const
     isProd = process.env.NODE_ENV === 'production',
-    PORT = 3000;
+    PORT = process.env.VITE_SERVER_PORT || 3000;
 
 let __dirname = path.dirname(fileURLToPath(import.meta.url)),
     resolve = (p) => path.resolve(__dirname, p)
