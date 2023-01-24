@@ -1,0 +1,41 @@
+{
+  "name": "vue-vite-ssr",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "",
+  "keywords": [
+    "Vue",
+    "Metadata",
+    "Meta",
+    "Metatags",
+    "Vite",
+    "Vue3",
+    "SSR",
+    "Vuex",
+    "VueRouter",
+    "SASS",
+    "SCSS",
+    "Express"
+  ],
+  "scripts": {
+    "serve": "NODE_ENV=production node ./src/server/index.js",
+    "build": "npm run build:client && npm run build:server",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
+    "build:server": "vite build --ssr src/server/index.js --outDir dist/server",
+    "dev": "node ./src/server/index.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "sass": "^1.57.1",
+    "vite": "^3.1.8"
+  }
+}
