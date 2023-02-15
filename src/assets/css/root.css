@@ -5,9 +5,9 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    color: var(--color);
+    color: var(--color-primary);
     font-family: var(--font-family);
-    background: var(--bg);
+    background: var(--background-primary);
     transition: .2s;
     overflow: hidden;
 }
@@ -21,7 +21,7 @@ ul, li {
     padding-inline-start: 0px;
 }
 a {
-    color: #fff;
+    color: var(--color-primary);
     text-decoration: none;
 }
 input, textarea {

@@ -1,15 +1,15 @@
 <template>
-    <header>
-        <nav>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
-        </nav>
-    </header>
-
+    <Header/>
     <RouterView v-slot="{ Component }">
         <component :is="Component" class="page"></component>
     </RouterView>
 </template>
+
+<script setup>
+
+import Header from './components/Header.vue';
+
+</script>
 
 <script>
 
@@ -20,4 +20,14 @@ export default {
 </script>
 
 <style lang="scss">
+
+.page {
+    padding: 0 5vw;
+    padding-top: 48px;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
 </style>

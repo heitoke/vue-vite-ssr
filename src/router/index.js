@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router';
 
-import HomeView from '../views/HomeView.vue';
-
 let baseUrl = import.meta.env.BASE_URL;
 
 const router = createRouter({
@@ -9,13 +7,21 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: HomeView
+            name: 'MainPage',
+            component: () => import('../pages/Main.vue'),
+            meta: { title: 'Home' }
         },
         {
             path: '/about',
-            name: 'about',
-            component: () => import('../views/AboutView.vue')
+            name: 'AboutPage',
+            component: () => import('../pages/About.vue'),
+            meta: { title: 'About' }
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'ErrorPage',
+            component: () => import('../pages/Error.vue'),
+            meta: { hide: true }
         }
     ]
 });

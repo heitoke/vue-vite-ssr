@@ -2,14 +2,11 @@
 import { basename } from 'node:path';
 
 // ? Vue SSR
-import { createSSRApp } from 'vue';
+import createApp from '../main';
 import { renderToString, ssrRenderComponent } from 'vue/server-renderer';
-import App from '../App.vue';
-import router from '../router/index.js';
 
 export async function render(url, manifest = null) {
-    let app = createSSRApp(App);
-    app.use(router);
+    let { app, router, store } = createApp();
 
     await router.push(url)
     await router.isReady()
