@@ -1,0 +1,15 @@
+:root {
+    --T: transparent;
+}
+
+html[theme="dark"]:root {
+    --color-primary: #e8e8e8;
+    --background-primary: #010101;
+}
+
+html[theme="light"]:root {
+    --color-primary: #010101;
+    --color-primary-alt: #171717;
+
+    --background-primary: #fff;
+}
