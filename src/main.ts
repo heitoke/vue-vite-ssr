@@ -1,4 +1,4 @@
-import { createSSRApp } from 'vue';
+import { createApp as createVueApp } from 'vue';
 
 import App from './App.vue';
 
@@ -9,8 +9,8 @@ import store from './store';
 import './assets/css/root.css';
 
 export const createApp = () => {
-    const app = createSSRApp(App);
-
+    const app = createVueApp(App);
+    
     app.use(router);
     app.use(store);
 

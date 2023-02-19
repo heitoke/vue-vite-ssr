@@ -106,7 +106,7 @@ export const render = async (url: string, manifest: string) => {
             }
 
             if (!meta?.title) {
-                let title = process.env.VITE_APP_NAME || 'Vue Vite SSR App';
+                let title = import.meta.env.VITE_APP_NAME || 'Vue Vite SSR TS App';
 
                 html = `<title>${title}</title>\n\t<meta name="title" content="${title}">\n${html}`;
             }

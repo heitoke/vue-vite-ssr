@@ -12,12 +12,9 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(import.meta);
-
-
 const
     isProd: boolean = false,
-    PORT: number = 3000,
+    PORT: number = Number(process.env.PORT) || 3000,
     __dirname: string = path.dirname(fileURLToPath(import.meta.url));
 
 function resolve(p: string): string {

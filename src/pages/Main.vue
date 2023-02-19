@@ -23,6 +23,9 @@ export default defineComponent({
             }
         }
     },
+    meta: {
+        description: 'Test'
+    },
     props: {
         msg: { type: String, default: () => 'Message' }
     },
