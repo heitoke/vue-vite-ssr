@@ -1,5 +1,5 @@
 import { basename } from 'node:path';
-import { createApp } from '../main';
+import { createApp } from './main';
 
 import { renderToString } from "@vue/server-renderer";
 
@@ -57,7 +57,9 @@ function renderPreloadLink(file: string) {
 export const render = async (url: string, manifest: string) => {
     const { app, router, store } = createApp();
 
-    await router.push(url);
+    console.log(router.currentRoute.value.name, url);
+
+    router.push(url);
     await router.isReady();
 
     // @ts-ignore
@@ -68,8 +70,9 @@ export const render = async (url: string, manifest: string) => {
 
     try {
         await Promise.all(matchedComponents.map(async (component: any) => {
-            if (!meta.title && component?.meta)
-                meta = typeof component.meta === 'function' ? await component?.meta(typeof component?.data === 'function' ? component?.data() : component?.data) : component.meta;
+            if (!meta.title && component?.meta) {
+                meta = await component?.meta(router.currentRoute.value);
+            }
             
             if (component?.asyncData) {
                 return component.asyncData({ store, route: router.currentRoute.value });

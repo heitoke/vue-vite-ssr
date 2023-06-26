@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --loader ts-node/esm ./src/server/index.ts",
+    "dev": "node --loader ts-node/esm ./server.ts",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },

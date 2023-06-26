@@ -22,7 +22,7 @@ function resolve(p: string): string {
 }
 
 async function getIndexHTML() {
-    let indexHTML: string = isProd ? resolve('../../dist/client/index.html') : resolve('../../index.html'),
+    let indexHTML: string = isProd ? resolve('./dist/client/index.html') : resolve('./index.html'),
         html: string = await fs.promises.readFile(indexHTML, 'utf-8');
     
     return html;
@@ -30,14 +30,17 @@ async function getIndexHTML() {
 
 async function start() {
     const
-        manifest = isProd ? JSON.parse(fs.readFileSync(resolve('../../dist/client/ssr-manifest.json'), 'utf-8')) : null,
+        manifest = isProd ? JSON.parse(fs.readFileSync(resolve('./dist/client/ssr-manifest.json'), 'utf-8')) : null,
         app = express();
     
     if (isProd) app.use(express.static('dist/client', { index: false }));
     else {
         var vite = await createServer({
+            base: '/',
             root: process.cwd(),
-            server: { middlewareMode: true },
+            server: {
+                middlewareMode: true
+            },
             appType: 'custom'
         })
 
@@ -46,15 +49,15 @@ async function start() {
 
     app.use('*', async (req, res, next) => {
         try {
-            let url = req.url,
+            let url = req.originalUrl,
                 template = await getIndexHTML(),
                 render = null;
 
             // @ts-ignore
-            if (isProd) render = await (await import('../../dist/server/entry.ts')).render;
+            if (isProd) render = await (await import('./dist/entry-server.js')).render;
             else {
                 template = await vite.transformIndexHtml(url, template);
-                render = (await vite.ssrLoadModule(resolve('./entry.ts'))).render;
+                render = (await vite.ssrLoadModule(resolve('./src/entry-server.ts'))).render;
             }
             
             let [appHtml, preloadLinks, meta] = await render(url, manifest),

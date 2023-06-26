@@ -7,11 +7,16 @@ const routes: RouteRecordRaw[] = [
         name: 'MainPage',
         path: '/',
         component: () => import('../pages/Main.vue')
+    },
+    {
+        name: 'AboutPage',
+        path: '/about',
+        component: () => import('../pages/About.vue')
     }
 ];
 
 const router = createRouter({
-    history: import.meta.env.SSR ? createMemoryHistory(baseUrl) : createWebHistory(baseUrl),
+    history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
     routes
 });
 

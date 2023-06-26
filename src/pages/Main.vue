@@ -13,6 +13,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    name: 'MainPage',
     computed: {
         fullName: {
             get() {
@@ -23,8 +24,10 @@ export default defineComponent({
             }
         }
     },
-    meta: {
-        description: 'Test'
+    meta() {
+        return {
+            title: 'Home'
+        }
     },
     props: {
         msg: { type: String, default: () => 'Message' }
@@ -37,7 +40,9 @@ export default defineComponent({
         pageInit(message: string) {
             console.log('page', message);
         }
-    }
+    },
+    methods: {},
+    mounted() {}
 });
 
 </script>
