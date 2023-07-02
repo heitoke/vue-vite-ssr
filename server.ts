@@ -48,8 +48,6 @@ async function start() {
     }
 
     app.use('*', async (req, res, next) => {
-        console.log('EEE');
-        
         try {
             let url = req.originalUrl,
                 template = await getIndexHTML(),
@@ -74,12 +72,6 @@ async function start() {
             next(err);
         }
     });
-
-    app.get('/test', (req, res) => {
-        console.log('TEst');
-        
-        res.status(200).json({ message: 'Hello world' });
-    })
     
     app.listen(PORT, () => {
         console.log(`Server start -> http://localhost:${PORT}`);
