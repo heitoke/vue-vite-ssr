@@ -30,7 +30,7 @@ async function getIndexHTML() {
 
 async function start() {
     const
-        // manifest = isProd ? JSON.parse(fs.readFileSync(resolve('./dist/client/ssr-manifest.json'), 'utf-8')) : null,
+        manifest = isProd ? JSON.parse(fs.readFileSync(resolve('./dist/client/ssr-manifest.json'), 'utf-8')) : null,
         app = express();
     
     // if (isProd) app.use(express.static('dist/client', { index: false }));
@@ -73,8 +73,12 @@ async function start() {
     //     }
     // });
 
-    app.get('/test/test', (req, res) => {
-        res.status(200).json({ message: 'Hello world' });
+    app.get('/info', (req, res) => {
+        res.status(200).json({
+            a: resolve('./dist/client/ssr-manifest.json'),
+            manifest,
+            b: getIndexHTML()
+        });
     });
     
     app.listen(PORT, () => {
