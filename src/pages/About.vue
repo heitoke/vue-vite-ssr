@@ -9,7 +9,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'AboutPage'
+    name: 'AboutPage',
+    meta(route) {
+        return {
+            title: 'About'
+        }
+    },
 });
 
 </script>
