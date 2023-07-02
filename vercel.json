@@ -2,13 +2,9 @@
     "version": 2,
     "builds": [
         {
-            "src": "index.html",
-            "use": "@vercel/static"
-        },
-        {
             "src": "server.ts",
-            "use": "@vercel/static"
+            "use": "@vercel/node"
         }
     ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/server.ts" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
