@@ -74,8 +74,10 @@ async function start() {
     // });
 
     app.get('/info', (req, res) => {
+        const files = fs.readdirSync(path.join(__dirname, 'dist/client'));
+
         res.status(200).json({
-            a: resolve('./dist/client/ssr-manifest.json'),
+            a: files,
             manifest,
             b: getIndexHTML()
         });
