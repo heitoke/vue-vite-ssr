@@ -81,7 +81,7 @@ async function start() {
             // a: files,
             files2,
             // manifest,
-            b: getIndexHTML()
+            // b: getIndexHTML()
         });
     });
     
