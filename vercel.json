@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "npm run preview",
+    "buildCommand": "npm run build",
     "builds": [
         {
             "src": "server.ts",

@@ -54,7 +54,7 @@ async function start() {
                 render;
 
             // @ts-ignore
-            if (isProd) render = await (await import('./dist/entry-server.js')).render;
+            if (isProd) render = await (await import('./dist/server/entry-server.js')).render;
             else {
                 template = await vite.transformIndexHtml(url, template);
                 render = (await vite.ssrLoadModule(resolve('./src/entry-server.ts'))).render;
