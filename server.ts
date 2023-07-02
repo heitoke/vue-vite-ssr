@@ -30,61 +30,47 @@ async function getIndexHTML() {
 
 async function start() {
     const
-        // manifest = isProd ? JSON.parse(fs.readFileSync(resolve('./dist/client/ssr-manifest.json'), 'utf-8')) : null,
+        manifest = isProd ? JSON.parse(fs.readFileSync(resolve('./dist/client/ssr-manifest.json'), 'utf-8')) : null,
         app = express();
     
-    // if (isProd) app.use(express.static('dist/client', { index: false }));
-    // else {
-    //     var vite = await createServer({
-    //         base: '/',
-    //         root: process.cwd(),
-    //         server: {
-    //             middlewareMode: true
-    //         },
-    //         appType: 'custom'
-    //     })
+    if (isProd) app.use(express.static('dist/client', { index: false }));
+    else {
+        var vite = await createServer({
+            base: '/',
+            root: process.cwd(),
+            server: {
+                middlewareMode: true
+            },
+            appType: 'custom'
+        })
 
-    //     app.use(vite.middlewares);
-    // }
+        app.use(vite.middlewares);
+    }
 
-    // app.use('*', async (req, res, next) => {
-    //     try {
-    //         let url = req.originalUrl,
-    //             template = await getIndexHTML(),
-    //             render;
+    app.use('*', async (req, res, next) => {
+        try {
+            let url = req.originalUrl,
+                template = await getIndexHTML(),
+                render;
 
-    //         // @ts-ignore
-    //         if (isProd) render = await (await import('./dist/server/entry-server.js')).render;
-    //         else {
-    //             template = await vite.transformIndexHtml(url, template);
-    //             render = (await vite.ssrLoadModule(resolve('./src/entry-server.ts'))).render;
-    //         }
+            // @ts-ignore
+            if (isProd) render = await (await import('./dist/entry-server.js')).render;
+            else {
+                template = await vite.transformIndexHtml(url, template);
+                render = (await vite.ssrLoadModule(resolve('./src/entry-server.ts'))).render;
+            }
             
-    //         let [appHtml, preloadLinks, meta] = await render(url, manifest),
-    //             html = template
-    //                 .replace(`<!--preload-links-->`, preloadLinks)
-    //                 .replace('<!--app-html-->', appHtml)
-    //                 .replace('<!--meta-->', meta.toHtml());
+            let [appHtml, preloadLinks, meta] = await render(url, manifest),
+                html = template
+                    .replace(`<!--preload-links-->`, preloadLinks)
+                    .replace('<!--app-html-->', appHtml)
+                    .replace('<!--meta-->', meta.toHtml());
 
-    //         res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
-    //     } catch (err) {
-    //         if (vite) vite.ssrFixStacktrace(err as Error);
-    //         next(err);
-    //     }
-    // });
-
-    app.get('/info', (req, res) => {
-        // const files = fs.readdirSync('./dist');
-        const files2 = fs.readdirSync('./');
-        const files3 = fs.readdirSync('../');
-
-        res.status(200).json({
-            // a: files,
-            files2,
-            files3
-            // manifest,
-            // b: getIndexHTML()
-        });
+            res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+        } catch (err) {
+            if (vite) vite.ssrFixStacktrace(err as Error);
+            next(err);
+        }
     });
     
     app.listen(PORT, () => {

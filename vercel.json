@@ -6,5 +6,5 @@
             "use": "@vercel/node"
         }
     ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/server.ts" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
