@@ -51,7 +51,7 @@ async function start() {
         try {
             let url = req.originalUrl,
                 template = await getIndexHTML(),
-                render = null;
+                render;
 
             // @ts-ignore
             if (isProd) render = await (await import('./dist/entry-server.js')).render;
