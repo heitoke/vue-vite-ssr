@@ -7,7 +7,7 @@
     "dev": "npx ts-node-esm ./server.ts",
     "serve": "cross-env NODE_ENV=production npx ts-node-esm ./server.ts",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir dist/client",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
     "preview": "npm run build && npm run serve"
   },
