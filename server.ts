@@ -76,7 +76,7 @@ async function start() {
     app.get('/info', (req, res) => {
         // const files = fs.readdirSync('./dist');
         const files2 = fs.readdirSync('./');
-        const files3 = fs.readdirSync('.ю/');
+        const files3 = fs.readdirSync('../');
 
         res.status(200).json({
             // a: files,
