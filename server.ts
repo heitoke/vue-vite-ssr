@@ -76,10 +76,12 @@ async function start() {
     app.get('/info', (req, res) => {
         // const files = fs.readdirSync('./dist');
         const files2 = fs.readdirSync('./');
+        const files3 = fs.readdirSync('.ю/');
 
         res.status(200).json({
             // a: files,
             files2,
+            files3
             // manifest,
             // b: getIndexHTML()
         });
