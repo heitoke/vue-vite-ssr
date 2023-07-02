@@ -57,8 +57,6 @@ function renderPreloadLink(file: string) {
 export const render = async (url: string, manifest: string) => {
     const { app, router, store } = createApp();
 
-    console.log(router.currentRoute.value.name, url);
-
     router.push(url);
     await router.isReady();
 
