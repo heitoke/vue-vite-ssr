@@ -74,10 +74,12 @@ async function start() {
     // });
 
     app.get('/info', (req, res) => {
-        const files = fs.readdirSync(path.join(__dirname, 'dist/client'));
+        const files = fs.readdirSync('./dist');
+        const files2 = fs.readdirSync('./');
 
         res.status(200).json({
             a: files,
+            files2,
             // manifest,
             b: getIndexHTML()
         });
