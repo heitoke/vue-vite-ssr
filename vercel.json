@@ -4,6 +4,10 @@
         {
             "src": "server.ts",
             "use": "@vercel/node"
+        },
+        {
+            "src": "vite.config.ts",
+            "use": "@vercel/vite"
         }
     ],
     "rewrites": [{ "source": "/(.*)", "destination": "/server.ts" }]
